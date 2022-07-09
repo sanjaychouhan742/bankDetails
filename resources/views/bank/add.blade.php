@@ -178,8 +178,9 @@ function isEmpty(){
   let image = document.getElementById("image").value;
   let nominee_fullName = document.getElementById("nominee_fullName").value;
   let nominee_account = document.getElementById("nominee_account").value;
+  $('#btn_contact_details').prop('disabled', true);
   if (first_name!='' && last_name!='' && image!='' && nominee_fullName!='' && nominee_account!='') {
-    document.getElementById("btn_contact_details").removeAttribute("disabled")
+    $('#btn_contact_details').prop('disabled', false);
   }
 }
 </script>
@@ -194,9 +195,7 @@ $(document).ready(function(){
   var error_image = '';
   var error_last_name = '';
   var error_first_name = '';
-  var error_password = '';
-  var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-  
+
   if($.trim($('#first_name').val()).length == 0)
   {
    error_first_name = 'First Name is required';
@@ -249,12 +248,16 @@ $(document).ready(function(){
   }
   else
   {
-   
-    error_image = '';
+   var image = document.getElementById("image");
+   var size = parseFloat(image.files[0].size / (1024 * 1024)).toFixed(2); 
+            if(size > 2) {
+                alert('Please select image size less than 2 MB');
+            }else{
+                 error_image = '';
     $('#error_image').text(error_image);
     $('#image').removeClass('has-error');
-   
-  }
+      }
+    }
   
   // if($.trim($('#password').val()).length == 0)
   // {

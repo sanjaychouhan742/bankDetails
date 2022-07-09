@@ -112,7 +112,7 @@
   </div>
   <div class="form-group nominee_account" style="display:none;" >
     <label class="label-control">Nominne Account</label>
-    <p><input type="text" name="nominee_account" id="nominee_account" value="{{old('nominee_account')}}" placeholder="Nominee Account Number" oninput="this.className = ''" class="form-control"></p>
+    <p><input type="text" name="nominee_account" id="nominee_account" value="{{old('nominee_account')}}" placeholder="Nominee Account Number" onkeyup="isEmpty()" class="form-control"></p>
      @error('nominee_account')
   <div class="alert alert-danger">{{$message}}</div>
  @enderror
@@ -177,7 +177,8 @@ function isEmpty(){
   let last_name = document.getElementById("last_name").value;
   let image = document.getElementById("image").value;
   let nominee_fullName = document.getElementById("nominee_fullName").value;
-  if (first_name!='' && last_name!='' && image!='' && nominee_fullName!='' ) {
+  let nominee_account = document.getElementById("nominee_account").value;
+  if (first_name!='' && last_name!='' && image!='' && nominee_fullName!='' && nominee_account!='') {
     document.getElementById("btn_contact_details").removeAttribute("disabled")
   }
 }

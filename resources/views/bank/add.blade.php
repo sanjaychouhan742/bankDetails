@@ -51,6 +51,7 @@
        <div class="panel-heading">Personal Details</div>
        <div class="panel-body">
         <div class="form-group">
+          <p id="demo"></p>
          <label>First Name</label>
          <input type="text" name="first_name" id="first_name" class="form-control" onkeyup="isEmpty()" />
          <span id="error_first_name" class="text-danger"></span>
@@ -73,10 +74,9 @@
    </div>
 
    <div class="form-group">
-   <input style="display:none;" type="text" name="addharcard" id="addharcard" value="{{old('addharcard')}}" placeholder="Enter Addharcard Number..." class="form-control" />
-   @error('addharcard')
-  <div class="alert alert-danger">{{$message}}</div>
- @enderror
+   <input style="display:none;" type="text"  id="addharcard" value="{{old('addharcard')}}" placeholder="Enter Addharcard Number..." class="form-control" >
+   <input type="hidden" name="addharcard" id="addharcard_str">
+ <span id="error_addharcard" class="text-danger"></span>
    </div>
 
         </div>
@@ -108,14 +108,13 @@
   <div class="form-group">
       <label class="label-control">Nominee has Account In Same Bank:</label>
     <p>Yes<input type="radio" id="account_yes" value="yes_account"  oninput="this.className = ''"/></p>
-    <p>No<input type="radio" value="no_account" oninput="this.className = ''"/></p>
+    <p>No<input type="radio" value="no_account"></p>
   </div>
   <div class="form-group nominee_account" style="display:none;" >
     <label class="label-control">Nominne Account</label>
-    <p><input type="text" name="nominee_account" id="nominee_account" value="{{old('nominee_account')}}" placeholder="Nominee Account Number" onkeyup="isEmpty()" class="form-control"></p>
-     @error('nominee_account')
-  <div class="alert alert-danger">{{$message}}</div>
- @enderror
+    <input type="text" id="nominee_account" value="{{old('nominee_account')}}" placeholder="Nominee Account Number" onkeyup="isEmpty()" class="form-control" maxlength="10">
+      <input type="hidden" name="nominee_account" id="account">
+ <span id="error_account" class="text-danger"></span>
   </div>
  </div>
         <br />
@@ -136,7 +135,6 @@
 </html>
 
     <script type="text/javascript">
-$(document).ready(function(){
 $("#yes_check").change(function(){
 if($(this).val()=="yes")
 {
@@ -170,8 +168,7 @@ $(".nominee_account").hide();
 }
 });
 
-});
-
+//For Submit Button Default
 function isEmpty(){
   let first_name = document.getElementById("first_name").value;
   let last_name = document.getElementById("last_name").value;
@@ -179,17 +176,35 @@ function isEmpty(){
   let nominee_fullName = document.getElementById("nominee_fullName").value;
   let nominee_account = document.getElementById("nominee_account").value;
   $('#btn_contact_details').prop('disabled', true);
-  if (first_name!='' && last_name!='' && image!='' && nominee_fullName!='' && nominee_account!='') {
+  if (first_name!='' && last_name!='' && image!='' && nominee_fullName!='' && nominee_account != '') {
     $('#btn_contact_details').prop('disabled', false);
   }
 }
+
+// For Add 0 before type in input field
+ $("#addharcard").keyup(function(){
+ let addharcard = $('#addharcard').val();
+ document.querySelector('#addharcard_str').defaultValue = addharcard.padStart(10,"0");
+ // document.getElementById("addharcard").defaultValue = addharcard.padStart(4,"0");
+});
+
+// For Add 0 before type in input field
+ $("#nominee_account").keyup(function(){
+ let nominee_account = $('#nominee_account').val();
+ document.querySelector('#account').defaultValue = nominee_account.padStart(10,"0");
+  //document.getElementById("addharcard").innerHTML = addharcard.padStart(4,"0");
+});
 </script>
+
 <script>
+  //For validation
 $(document).ready(function(){
- 
  $('#btn_login_details').click(function(){
   var first_name = $('#first_name').val();
   var last_name = $('#last_name').val();
+  var addharcard_str = $('#addharcard_str').val();
+  //console.log(addharcard_str);
+  var error_addharcard = '';
   var error_image = '';
   var error_last_name = '';
   var error_first_name = '';
@@ -213,6 +228,28 @@ $(document).ready(function(){
     error_first_name = '';
     $('#error_first_name').text(error_first_name);
     $('#first_name').removeClass('has-error');
+   }
+  }
+
+  if(addharcard_str.length == 0)
+  {
+   error_addharcard = 'Addharcard is required';
+   $('#error_addharcard').text(error_addharcard);
+   $('#addharcard_str').addClass('has-error');
+  }
+  else
+  {
+   if (addharcard_str.length >10)
+   {
+    error_addharcard = 'Please enter Less than 10';
+    $('#error_addharcard').text(error_addharcard);
+    $('#addharcard_str').addClass('has-error');
+   }
+   else
+   {
+    error_addharcard = '';
+    $('#error_addharcard').text(error_addharcard);
+    $('#addharcard_str').removeClass('has-error');
    }
   }
 
@@ -256,21 +293,8 @@ $(document).ready(function(){
     $('#image').removeClass('has-error');
       }
     }
-  
-  // if($.trim($('#password').val()).length == 0)
-  // {
-  //  error_password = 'Password is required';
-  //  $('#error_password').text(error_password);
-  //  $('#password').addClass('has-error');
-  // }
-  // else
-  // {
-  //  error_password = '';
-  //  $('#error_password').text(error_password);
-  //  $('#password').removeClass('has-error');
-  // }
 
-  if(error_first_name != '' || error_last_name != '' || error_image != '')
+  if(error_first_name != '' || error_last_name != '' || error_image != '' || error_addharcard != '')
   {
    return false;
   }
@@ -300,37 +324,33 @@ $(document).ready(function(){
   $('#login_details').addClass('active in');
  });
  
- // $('#btn_personal_details').click(function(){
- //  var error_first_name = '';
- //  var error_last_name = '';
+ // $('#btn_contact_details').click(function(){
+ //  var account = $('#account').val();
+ //  var error_account = '';
   
- //  if($.trim($('#first_name').val()).length == 0)
+ //  if(account.length == 0)
  //  {
- //   error_first_name = 'First Name is required';
- //   $('#error_first_name').text(error_first_name);
- //   $('#first_name').addClass('has-error');
+ //   error_account = 'Nominee Account is required';
+ //   $('#error_account').text(error_account);
+ //   $('#account').addClass('has-error');
  //  }
  //  else
  //  {
- //   error_first_name = '';
- //   $('#error_first_name').text(error_first_name);
- //   $('#first_name').removeClass('has-error');
+ //  if (account.length >12)
+ //   {
+ //    error_account = 'Please enter Less than 12';
+ //    $('#error_account').text(error_account);
+ //    $('#account').addClass('has-error');
+ //   }
+ //   else
+ //   {
+ //    error_account = '';
+ //    $('#error_account').text(error_account);
+ //    $('#account').removeClass('has-error');
+ //   }
  //  }
   
- //  if($.trim($('#last_name').val()).length == 0)
- //  {
- //   error_last_name = 'Last Name is required';
- //   $('#error_last_name').text(error_last_name);
- //   $('#last_name').addClass('has-error');
- //  }
- //  else
- //  {
- //   error_last_name = '';
- //   $('#error_last_name').text(error_last_name);
- //   $('#last_name').removeClass('has-error');
- //  }
-
- //  if(error_first_name != '' || error_last_name != '')
+ //  if(error_account != '')
  //  {
  //   return false;
  //  }

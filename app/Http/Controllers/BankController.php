@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+<<<<<<< HEAD
 use App\Models\bank;
+=======
+use App\Models\bank_detail;
+>>>>>>> 095726324de77a1e8a74e2033a84d4f1bbc720bc
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
@@ -14,6 +18,7 @@ class BankController extends Controller
     }
 
     public function store(Request $req){
+<<<<<<< HEAD
     	$validate = $req->validate([
            'first_name' => 'required|max:10',
            'last_name' => 'required|max:10',
@@ -22,6 +27,9 @@ class BankController extends Controller
     	]);
 
     	$bank = new bank;
+=======
+    	$bank = new bank_detail;
+>>>>>>> 095726324de77a1e8a74e2033a84d4f1bbc720bc
     	$data = $req->input();
        $images = $req->image;
        $fileName = time().'-'.Str::random(5).'.'.$images->extension();
@@ -31,5 +39,8 @@ class BankController extends Controller
       	return back();
       	Storage::disk('local')->put('example.txt',$data);
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 095726324de77a1e8a74e2033a84d4f1bbc720bc
 }

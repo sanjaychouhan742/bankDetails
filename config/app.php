@@ -151,7 +151,10 @@ return [
         Illuminate\Foundation\Providers\FoundationServiceProvider::class,
         Illuminate\Hashing\HashServiceProvider::class,
         Illuminate\Mail\MailServiceProvider::class,
+<<<<<<< HEAD
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
+=======
+>>>>>>> 095726324de77a1e8a74e2033a84d4f1bbc720bc
         Illuminate\Notifications\NotificationServiceProvider::class,
         Illuminate\Pagination\PaginationServiceProvider::class,
         Illuminate\Pipeline\PipelineServiceProvider::class,
@@ -175,9 +178,14 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+<<<<<<< HEAD
         Yajra\DataTables\DataTablesServiceProvider::class,
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
 ],
+=======
+
+    ],
+>>>>>>> 095726324de77a1e8a74e2033a84d4f1bbc720bc
 
     /*
     |--------------------------------------------------------------------------
@@ -231,8 +239,11 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+<<<<<<< HEAD
         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+=======
+>>>>>>> 095726324de77a1e8a74e2033a84d4f1bbc720bc
 
     ],
 

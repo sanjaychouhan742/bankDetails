@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\AjaxController;
@@ -8,6 +9,12 @@ use App\Http\Controllers\TokenController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AjaxPraticeController;
 use App\Http\Controllers\BankController;
+=======
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BankController;
+
+>>>>>>> 095726324de77a1e8a74e2033a84d4f1bbc720bc
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +25,7 @@ use App\Http\Controllers\BankController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+<<<<<<< HEAD
 Route::prefix('admin')->group(function(){
      Route::get('user',[LoginController::class,'user']);
     Route::get('/',[LoginController::class,'index'])->name('login.index');
@@ -76,14 +84,19 @@ Route::prefix('ajax')->group(function(){
   Route::get('edit/{id}',[AjaxPraticeController::class,'edit'])->name('ajax.edit');
   Route::post('update',[AjaxPraticeController::class,'update'])->name('ajax.update'); 
   });
+=======
+>>>>>>> 095726324de77a1e8a74e2033a84d4f1bbc720bc
 
 Route::prefix('bank')->group(function(){
   Route::get('add',[BankController::class,'add'])->name('bank.add');
   Route::post('store',[BankController::class,'store'])->name('bank.store'); 
   });
+<<<<<<< HEAD
  });
 });
 
 Route::prefix('userFront')->group(function (){
 Route::get('front',[TokenController::class,'user_front'])->name('front.user');
 });
+=======
+>>>>>>> 095726324de77a1e8a74e2033a84d4f1bbc720bc

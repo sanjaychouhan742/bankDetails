@@ -10,10 +10,14 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
+<<<<<<< HEAD
         "laravel/tinker": "^2.5",
         "realrashid/sweet-alert": "^5.1",
         "uxweb/sweet-alert": "^2.0",
         "yajra/laravel-datatables-oracle": "^9.20"
+=======
+        "laravel/tinker": "^2.5"
+>>>>>>> 095726324de77a1e8a74e2033a84d4f1bbc720bc
     },
     "require-dev": {
         "facade/ignition": "^2.5",
